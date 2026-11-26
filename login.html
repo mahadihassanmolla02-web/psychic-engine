@@ -4,357 +4,350 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>QuranPath - Student Login</title>
+<title>QuranPath - Student Portal</title>
 
 <style>
-* {
-  box-sizing: border-box;
+*{box-sizing:border-box}
+body{
+  margin:0;padding:20px;min-height:100vh;
+  font-family:Arial,sans-serif;background:#f3f7f4;
+  display:flex;align-items:center;justify-content:center
 }
-
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #f3f7f4;
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
+.container{
+  background:white;width:100%;max-width:460px;
+  padding:28px;border-radius:18px;
+  box-shadow:0 8px 35px #00000012
 }
-
-.container {
-  background: white;
-  width: 100%;
-  max-width: 420px;
-  padding: 35px;
-  border-radius: 18px;
-  box-shadow: 0 8px 35px #00000012;
+.logo{text-align:center;color:#087b50;font-size:30px;font-weight:bold}
+.subtitle{text-align:center;color:#777;margin-bottom:25px}
+h2{text-align:center;color:#222}
+input,select{
+  width:100%;padding:14px;margin:9px 0;
+  border:1px solid #ddd;border-radius:9px;font-size:15px
 }
-
-.logo {
-  text-align: center;
-  color: #087b50;
-  font-size: 30px;
-  font-weight: bold;
+button{
+  width:100%;padding:14px;margin-top:12px;
+  border:0;border-radius:9px;background:#087b50;
+  color:white;font-size:16px;font-weight:bold;cursor:pointer
 }
-
-.subtitle {
-  text-align: center;
-  color: #777;
-  margin-bottom: 28px;
+button:disabled{opacity:.6}
+.links{text-align:center;margin-top:18px}
+a{color:#087b50;cursor:pointer}
+#message{text-align:center;margin-top:15px;line-height:1.6}
+#dashboard{display:none}
+.panel{
+  background:#f3f7f4;padding:16px;
+  border-radius:12px;margin:15px 0
 }
-
-h2 {
-  text-align: center;
-  color: #222;
+.payment-number{
+  font-size:23px;font-weight:bold;color:#087b50;
+  text-align:center;margin:12px
 }
-
-input {
-  width: 100%;
-  padding: 14px;
-  margin: 9px 0;
-  border: 1px solid #ddd;
-  border-radius: 9px;
-  font-size: 15px;
+.status{
+  padding:10px;border-radius:8px;text-align:center;
+  font-weight:bold;margin:8px 0
 }
-
-button {
-  width: 100%;
-  padding: 14px;
-  margin-top: 12px;
-  border: none;
-  border-radius: 9px;
-  background: #087b50;
-  color: white;
-  font-size: 16px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-button:disabled {
-  opacity: .6;
-  cursor: wait;
-}
-
-.links {
-  text-align: center;
-  margin-top: 20px;
-}
-
-a {
-  color: #087b50;
-  cursor: pointer;
-  text-decoration: none;
-}
-
-#message {
-  text-align: center;
-  margin-top: 15px;
-  font-size: 14px;
-  line-height: 1.6;
-}
-
-#dashboard {
-  display: none;
-  text-align: center;
-}
-
+.pending{background:#fff2cc;color:#8a6200}
+.approved{background:#d8f5e2;color:#087b50}
+.rejected{background:#ffe0e0;color:#b00020}
+.small{font-size:13px;color:#666;line-height:1.6}
+hr{border:0;border-top:1px solid #eee;margin:20px 0}
 </style>
 </head>
 
 <body>
-
 <div class="container">
 
-  <div class="logo">QuranPath</div>
-  <p class="subtitle">৬০০ মিনিটে কুরআন শিখি</p>
+<div class="logo">QuranPath</div>
+<p class="subtitle">৬০০ মিনিটে কুরআন শিখি</p>
 
-  <section id="authSection">
+<section id="authSection">
+<h2 id="formTitle">Student Login</h2>
 
-    <h2 id="formTitle">Student Login</h2>
+<form id="authForm">
+<input type="text" id="name" placeholder="আপনার নাম" hidden>
+<input type="email" id="email" placeholder="ইমেইল ঠিকানা" required>
+<input type="password" id="password" placeholder="পাসওয়ার্ড" required minlength="6">
+<button type="submit" id="submitBtn">Login</button>
+</form>
 
-    <form id="authForm">
+<div class="links">
+<p id="registerLink">নতুন শিক্ষার্থী? <a id="showRegister">অ্যাকাউন্ট তৈরি করুন</a></p>
+<p id="loginLink" hidden>অ্যাকাউন্ট আছে? <a id="showLogin">লগইন করুন</a></p>
+<p><a id="forgotPassword">পাসওয়ার্ড ভুলে গেছেন?</a></p>
+</div>
+</section>
 
-      <input
-        type="text"
-        id="name"
-        placeholder="আপনার নাম"
-        hidden
-      >
+<section id="dashboard">
+<h2>Student Dashboard</h2>
+<p id="studentEmail" style="text-align:center"></p>
 
-      <input
-        type="email"
-        id="email"
-        placeholder="ইমেইল ঠিকানা"
-        required
-      >
+<div class="panel">
+<h3>আপনার কোর্স</h3>
+<p>৬০০ মিনিটে কুরআন শিখি</p>
+<p><b>কোর্স ফি: ৳৫০০</b></p>
+</div>
 
-      <input
-        type="password"
-        id="password"
-        placeholder="পাসওয়ার্ড"
-        required
-        minlength="6"
-      >
+<div class="panel">
+<h3>পেমেন্ট করুন</h3>
+<p class="small">নিচের যেকোনো একটি মাধ্যমে ৳৫০০ পাঠান।</p>
 
-      <button type="submit" id="submitBtn">
-        Login
-      </button>
+<p><b>বিকাশ (bKash)</b></p>
+<div class="payment-number">01876598566</div>
 
-    </form>
+<p><b>নগদ (Nagad)</b></p>
+<div class="payment-number">01876598566</div>
 
-    <div class="links">
+<p class="small">পেমেন্ট করার পর নিচের ফর্ম পূরণ করুন।</p>
 
-      <p id="registerLink">
-        নতুন শিক্ষার্থী?
-        <a id="showRegister">অ্যাকাউন্ট তৈরি করুন</a>
-      </p>
+<form id="paymentForm">
+<select id="paymentMethod" required>
+<option value="">পেমেন্ট মাধ্যম নির্বাচন করুন</option>
+<option value="bkash">বিকাশ</option>
+<option value="nagad">নগদ</option>
+</select>
 
-      <p id="loginLink" hidden>
-        অ্যাকাউন্ট আছে?
-        <a id="showLogin">লগইন করুন</a>
-      </p>
+<input type="text" id="senderNumber"
+placeholder="যে নম্বর থেকে টাকা পাঠিয়েছেন" required>
 
-      <p>
-        <a id="forgotPassword">পাসওয়ার্ড ভুলে গেছেন?</a>
-      </p>
+<input type="text" id="transactionId"
+placeholder="Transaction ID লিখুন" required>
 
-    </div>
+<button type="submit" id="paymentBtn">পেমেন্ট তথ্য জমা দিন</button>
+</form>
+</div>
 
-  </section>
+<div class="panel">
+<h3>পেমেন্টের অবস্থা</h3>
+<div id="paymentStatus" class="small">তথ্য লোড হচ্ছে...</div>
+<button type="button" id="refreshBtn">স্ট্যাটাস রিফ্রেশ করুন</button>
+</div>
 
-  <section id="dashboard">
+<button id="logoutBtn">Logout</button>
+</section>
 
-    <h2>স্বাগতম!</h2>
-    <p id="studentEmail"></p>
-    <p>আপনি সফলভাবে QuranPath-এ লগইন করেছেন।</p>
-
-    <button id="logoutBtn">Logout</button>
-
-  </section>
-
-  <div id="message"></div>
-
+<div id="message"></div>
 </div>
 
 <script type="module">
-
 import { supabase } from './supabase-config.js';
 
-const authSection = document.getElementById('authSection');
-const dashboard = document.getElementById('dashboard');
-const authForm = document.getElementById('authForm');
-
-const nameInput = document.getElementById('name');
-const emailInput = document.getElementById('email');
-const passwordInput = document.getElementById('password');
-
-const submitBtn = document.getElementById('submitBtn');
-const message = document.getElementById('message');
+const $ = id => document.getElementById(id);
 
 let mode = 'login';
+let currentUser = null;
 
-function showMessage(text, color = 'green') {
-  message.textContent = text;
-  message.style.color = color;
+function showMessage(text,color='green'){
+  $('message').textContent=text;
+  $('message').style.color=color;
 }
 
-function setMode(newMode) {
-  mode = newMode;
-
-  nameInput.hidden = mode !== 'register';
-
-  document.getElementById('formTitle').textContent =
-    mode === 'register' ? 'Student Registration' : 'Student Login';
-
-  submitBtn.textContent =
-    mode === 'register' ? 'Create Account' : 'Login';
-
-  document.getElementById('registerLink').hidden =
-    mode === 'register';
-
-  document.getElementById('loginLink').hidden =
-    mode !== 'register';
-
-  document.getElementById('forgotPassword').parentElement.hidden =
-    mode !== 'login';
-
+function setMode(newMode){
+  mode=newMode;
+  $('name').hidden=mode!=='register';
+  $('name').required=mode==='register';
+  $('formTitle').textContent=mode==='register'
+    ?'Student Registration':'Student Login';
+  $('submitBtn').textContent=mode==='register'
+    ?'Create Account':'Login';
+  $('registerLink').hidden=mode==='register';
+  $('loginLink').hidden=mode!=='register';
+  $('forgotPassword').parentElement.hidden=mode!=='login';
   showMessage('');
 }
 
-document.getElementById('showRegister').onclick = () =>
-  setMode('register');
+$('showRegister').onclick=()=>setMode('register');
+$('showLogin').onclick=()=>setMode('login');
 
-document.getElementById('showLogin').onclick = () =>
-  setMode('login');
-
-authForm.addEventListener('submit', async (e) => {
+$('authForm').addEventListener('submit',async e=>{
   e.preventDefault();
-
-  submitBtn.disabled = true;
+  $('submitBtn').disabled=true;
   showMessage('অপেক্ষা করুন...');
 
-  try {
-    const email = emailInput.value.trim();
-    const password = passwordInput.value;
-
+  try{
+    const email=$('email').value.trim();
+    const password=$('password').value;
     let result;
 
-    if (mode === 'register') {
+    if(mode==='register'){
+      const name=$('name').value.trim();
+      if(!name) throw new Error('আপনার নাম লিখুন।');
 
-      const name = nameInput.value.trim();
-
-      if (!name) {
-        throw new Error('আপনার নাম লিখুন।');
-      }
-
-      result = await supabase.auth.signUp({
-        email,
-        password,
-        options: {
-          data: {
-            full_name: name
-          }
-        }
+      result=await supabase.auth.signUp({
+        email,password,
+        options:{data:{full_name:name}}
       });
 
-      if (result.error) throw result.error;
+      if(result.error) throw result.error;
 
-      if (result.data.session) {
-        showMessage('অ্যাকাউন্ট তৈরি হয়েছে!');
-        showDashboard(result.data.user);
-      } else {
-        showMessage(
-          'রেজিস্ট্রেশন সফল! আপনার ইমেইল চেক করে অ্যাকাউন্ট নিশ্চিত করুন।'
-        );
+      if(result.data.session){
+        await showDashboard(result.data.user);
+      }else{
+        showMessage('রেজিস্ট্রেশন সফল! ইমেইল চেক করে অ্যাকাউন্ট নিশ্চিত করুন।');
       }
-
-    } else {
-
-      result = await supabase.auth.signInWithPassword({
-        email,
-        password
-      });
-
-      if (result.error) throw result.error;
-
+    }else{
+      result=await supabase.auth.signInWithPassword({email,password});
+      if(result.error) throw result.error;
+      await showDashboard(result.data.user);
       showMessage('লগইন সফল!');
-      showDashboard(result.data.user);
     }
-
-  } catch (error) {
-    showMessage(error.message, 'red');
-  } finally {
-    submitBtn.disabled = false;
+  }catch(error){
+    showMessage(error.message,'red');
+  }finally{
+    $('submitBtn').disabled=false;
   }
 });
 
-document.getElementById('forgotPassword').onclick =
-async () => {
-
-  const email = emailInput.value.trim();
-
-  if (!email) {
-    showMessage('প্রথমে আপনার ইমেইল লিখুন।', 'red');
+$('forgotPassword').onclick=async()=>{
+  const email=$('email').value.trim();
+  if(!email){
+    showMessage('প্রথমে আপনার ইমেইল লিখুন।','red');
     return;
   }
-
-  try {
-    const { error } =
-      await supabase.auth.resetPasswordForEmail(email);
-
-    if (error) throw error;
-
+  try{
+    const {error}=await supabase.auth.resetPasswordForEmail(email);
+    if(error) throw error;
     showMessage('পাসওয়ার্ড রিসেটের লিংক ইমেইলে পাঠানো হয়েছে।');
-
-  } catch (error) {
-    showMessage(error.message, 'red');
+  }catch(error){
+    showMessage(error.message,'red');
   }
 };
 
-function showDashboard(user) {
-  authSection.style.display = 'none';
-  dashboard.style.display = 'block';
-
-  document.getElementById('studentEmail').textContent =
-    user.email || '';
+async function showDashboard(user){
+  currentUser=user;
+  $('authSection').style.display='none';
+  $('dashboard').style.display='block';
+  $('studentEmail').textContent=user.email||'';
+  await loadPaymentStatus();
 }
 
-document.getElementById('logoutBtn').onclick =
-async () => {
+async function loadPaymentStatus(){
+  $('paymentStatus').textContent='তথ্য লোড হচ্ছে...';
 
-  const { error } = await supabase.auth.signOut();
+  const {data,error}=await supabase
+    .from('payments')
+    .select('payment_method,sender_number,transaction_id,status,created_at')
+    .eq('student_id',currentUser.id)
+    .order('created_at',{ascending:false});
 
-  if (error) {
-    showMessage(error.message, 'red');
+  if(error){
+    $('paymentStatus').textContent='স্ট্যাটাস পাওয়া যায়নি: '+error.message;
     return;
   }
 
-  dashboard.style.display = 'none';
-  authSection.style.display = 'block';
+  if(!data || data.length===0){
+    $('paymentStatus').textContent='এখনো কোনো পেমেন্ট জমা দেননি।';
+    return;
+  }
 
-  authForm.reset();
+  $('paymentStatus').innerHTML='';
+
+  data.forEach(payment=>{
+    const item=document.createElement('div');
+    item.className='panel';
+
+    const method=payment.payment_method==='bkash'?'বিকাশ':'নগদ';
+    const statusText={
+      pending:'Pending - যাচাই করা হচ্ছে',
+      approved:'Approved - পেমেন্ট অনুমোদিত',
+      rejected:'Rejected - পেমেন্ট বাতিল'
+    }[payment.status]||payment.status;
+
+    const status=document.createElement('div');
+    status.className='status '+payment.status;
+    status.textContent=statusText;
+
+    const details=document.createElement('p');
+    details.className='small';
+    details.textContent=
+      'মাধ্যম: '+method+
+      ' | নম্বর: '+payment.sender_number+
+      ' | Transaction ID: '+payment.transaction_id;
+
+    item.append(details,status);
+    $('paymentStatus').append(item);
+  });
+}
+
+$('paymentForm').addEventListener('submit',async e=>{
+  e.preventDefault();
+
+  $('paymentBtn').disabled=true;
+  showMessage('পেমেন্ট তথ্য জমা হচ্ছে...');
+
+  try{
+    const method=$('paymentMethod').value;
+    const sender=$('senderNumber').value.trim();
+    const trx=$('transactionId').value.trim();
+
+    if(!/^[0-9]{11}$/.test(sender)){
+      throw new Error('সঠিক ১১ সংখ্যার মোবাইল নম্বর লিখুন।');
+    }
+
+    if(!trx) throw new Error('Transaction ID লিখুন।');
+
+    const {data:course,error:courseError}=await supabase
+      .from('courses')
+      .select('id')
+      .order('id',{ascending:true})
+      .limit(1)
+      .maybeSingle();
+
+    if(courseError) throw courseError;
+    if(!course) throw new Error('কোর্স পাওয়া যায়নি। আগে courses টেবিলে কোর্স যুক্ত করুন।');
+
+    const {error}=await supabase
+      .from('payments')
+      .insert({
+        student_id:currentUser.id,
+        course_id:course.id,
+        payment_method:method,
+        sender_number:sender,
+        transaction_id:trx,
+        status:'pending'
+      });
+
+    if(error) throw error;
+
+    $('paymentForm').reset();
+    showMessage('পেমেন্ট তথ্য জমা হয়েছে। যাচাইয়ের জন্য অপেক্ষা করুন।');
+    await loadPaymentStatus();
+
+  }catch(error){
+    showMessage(error.message,'red');
+  }finally{
+    $('paymentBtn').disabled=false;
+  }
+});
+
+$('refreshBtn').onclick=loadPaymentStatus;
+
+$('logoutBtn').onclick=async()=>{
+  const {error}=await supabase.auth.signOut();
+  if(error){
+    showMessage(error.message,'red');
+    return;
+  }
+  currentUser=null;
+  $('dashboard').style.display='none';
+  $('authSection').style.display='block';
+  $('authForm').reset();
   setMode('login');
-
   showMessage('আপনি লগআউট করেছেন।');
 };
 
-async function checkLogin() {
-  const { data, error } = await supabase.auth.getSession();
-
-  if (error) {
-    showMessage(error.message, 'red');
+async function checkLogin(){
+  const {data,error}=await supabase.auth.getSession();
+  if(error){
+    showMessage(error.message,'red');
     return;
   }
-
-  if (data.session) {
-    showDashboard(data.session.user);
+  if(data.session){
+    await showDashboard(data.session.user);
   }
 }
 
 checkLogin();
-
 </script>
-
 </body>
 </html>
