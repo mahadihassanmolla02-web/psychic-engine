@@ -2,158 +2,264 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>QuranPath - Student Portal</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>QuranPath — Student Portal</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Amiri:wght@400;700&display=swap">
 
 <style>
+:root{
+--bg:#f6f1e4;--surface:#fffdf6;--ink:#1d2b24;
+--muted:#5d6b63;--green:#0f5b43;--green2:#0b3f2f;
+--gold:#b98a2e;--line:#e4d9bb;--red:#c0392b;
+box-sizing:border-box
+}
+@media(prefers-color-scheme:dark){
+:root:not([data-theme="light"]){
+--bg:#0d1a15;--surface:#14251e;--ink:#eee8d5;
+--muted:#a3b2a9;--green:#1b7d5d;--green2:#08241b;
+--gold:#d9ae55;--line:#2a4136;--red:#ff7a6b
+}}
 *{box-sizing:border-box}
 body{
-  margin:0;padding:20px;min-height:100vh;
-  font-family:Arial,sans-serif;background:#f3f7f4;
-  display:flex;align-items:center;justify-content:center
+margin:0;background:var(--bg);color:var(--ink);
+font-family:"Hind Siliguri",sans-serif;line-height:1.7;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Cpath d='M30 6l6 12 12-6-6 12 12 6-12 6 6 12-12-6-6 12-6-12-12 6 6-12-12-6 12-6-6-12 12 6z' fill='none' stroke='%23b98a2e' stroke-opacity='.13'/%3E%3C/svg%3E")
 }
-.container{
-  background:white;width:100%;max-width:460px;
-  padding:28px;border-radius:18px;
-  box-shadow:0 8px 35px #00000012
+.hero{
+background:linear-gradient(180deg,var(--green2),var(--green));
+color:#fffdf6;text-align:center;padding:28px 16px;
 }
-.logo{text-align:center;color:#087b50;font-size:30px;font-weight:bold}
-.subtitle{text-align:center;color:#777;margin-bottom:25px}
-h2{text-align:center;color:#222}
-input,select{
-  width:100%;padding:14px;margin:9px 0;
-  border:1px solid #ddd;border-radius:9px;font-size:15px
-}
-button{
-  width:100%;padding:14px;margin-top:12px;
-  border:0;border-radius:9px;background:#087b50;
-  color:white;font-size:16px;font-weight:bold;cursor:pointer
-}
-button:disabled{opacity:.6}
-.links{text-align:center;margin-top:18px}
-a{color:#087b50;cursor:pointer}
-#message{text-align:center;margin-top:15px;line-height:1.6}
-#dashboard{display:none}
+.bismillah{font-family:Amiri,serif;font-size:28px;color:#e8c878;margin:0}
+.hero h1{font-size:27px;margin:3px 0}
+.hero p{margin:0;opacity:.9}
+main{max-width:650px;margin:auto;padding:24px 15px 50px}
 .panel{
-  background:#f3f7f4;padding:16px;
-  border-radius:12px;margin:15px 0
+background:var(--surface);border:1px solid var(--line);
+border-radius:16px;padding:20px;margin-bottom:18px;
+box-shadow:0 5px 16px #0000000a
 }
+h2{font-size:23px;color:var(--green);margin:0 0 15px}
+h3{font-size:20px;color:var(--green);margin:0 0 10px}
+label{display:block;font-weight:600;margin:13px 0 5px}
+input,select{
+width:100%;padding:13px 15px;border:1px solid var(--line);
+border-radius:11px;background:var(--bg);color:var(--ink);
+font:16px "Hind Siliguri",sans-serif;margin-bottom:5px
+}
+input:focus,select:focus{outline:2px solid var(--gold)}
+button,.btn{
+display:block;width:100%;padding:12px 16px;
+border:0;border-radius:10px;background:var(--green);
+color:#fffdf6;font:600 16px "Hind Siliguri",sans-serif;
+cursor:pointer;text-align:center;text-decoration:none;margin-top:12px
+}
+button:hover,.btn:hover{background:var(--green2)}
+button:disabled{opacity:.6;cursor:not-allowed}
+button.gold,.btn.gold{background:var(--gold);color:#1d1606}
+.links{text-align:center;margin-top:15px}
+a{color:var(--green);cursor:pointer}
+.small{font-size:13px;color:var(--muted);line-height:1.6}
+.msg{padding:10px 13px;border-radius:10px;margin-top:12px;display:none}
+.msg.ok{display:block;background:#d8f5e2;color:#087b50}
+.msg.err{display:block;background:#ffe0e0;color:#b00020}
 .payment-number{
-  font-size:23px;font-weight:bold;color:#087b50;
-  text-align:center;margin:12px
+font-size:26px;font-weight:700;color:var(--green);text-align:center;
+margin:8px 0
 }
-.status{
-  padding:10px;border-radius:8px;text-align:center;
-  font-weight:bold;margin:8px 0
-}
+.status{padding:10px;border-radius:9px;text-align:center;font-weight:700;margin:9px 0}
 .pending{background:#fff2cc;color:#8a6200}
 .approved{background:#d8f5e2;color:#087b50}
 .rejected{background:#ffe0e0;color:#b00020}
-.small{font-size:13px;color:#666;line-height:1.6}
-hr{border:0;border-top:1px solid #eee;margin:20px 0}
+.nav{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.nav button{width:auto;flex:1;min-width:100px;font-size:14px;padding:10px}
+.nav button.active{background:var(--gold);color:#1d1606}
+.view{display:none}
+.view.on{display:block}
+.bk{
+background:linear-gradient(135deg,#e2136e,#a30c4f);
+color:white;border-radius:14px;padding:16px;text-align:center;margin:12px 0
+}
+.ng{background:linear-gradient(135deg,#f28b19,#d45a0b)}
+.bk .num{font-size:27px;font-weight:700}
+.copybtn{background:white;color:#a30c4f;width:auto;display:inline-block;padding:7px 14px;margin:5px}
+hr{border:0;border-top:1px solid var(--line);margin:18px 0}
+footer{text-align:center;color:var(--muted);padding:20px;font-size:13px}
+#authSection{max-width:520px;margin:auto}
+.user-email{overflow-wrap:anywhere;text-align:center;color:var(--muted)}
+.hidden{display:none!important}
 </style>
 </head>
 
 <body>
-<div class="container">
+<header class="hero">
+<p class="bismillah">بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</p>
+<h1>QuranPath</h1>
+<p>৬০০ মিনিটে কুরআন শিখি</p>
+</header>
 
-<div class="logo">QuranPath</div>
-<p class="subtitle">৬০০ মিনিটে কুরআন শিখি</p>
+<main>
 
-<section id="authSection">
+<section id="authSection" class="panel">
 <h2 id="formTitle">Student Login</h2>
 
 <form id="authForm">
-<input type="text" id="name" placeholder="আপনার নাম" hidden>
-<input type="email" id="email" placeholder="ইমেইল ঠিকানা" required>
-<input type="password" id="password" placeholder="পাসওয়ার্ড" required minlength="6">
-<button type="submit" id="submitBtn">Login</button>
+<div id="registerFields" class="hidden">
+<label>আপনার পূর্ণ নাম</label>
+<input id="name" type="text" placeholder="আপনার নাম লিখুন">
+
+<label>মোবাইল নম্বর</label>
+<input id="regPhone" type="tel" placeholder="01XXXXXXXXX">
+</div>
+
+<label>ইমেইল ঠিকানা</label>
+<input id="email" type="email" placeholder="example@gmail.com" required>
+
+<label>পাসওয়ার্ড</label>
+<input id="password" type="password" placeholder="কমপক্ষে ৬ অক্ষর" required minlength="6">
+
+<button type="submit" id="submitBtn">লগইন করুন</button>
 </form>
 
 <div class="links">
 <p id="registerLink">নতুন শিক্ষার্থী? <a id="showRegister">অ্যাকাউন্ট তৈরি করুন</a></p>
-<p id="loginLink" hidden>অ্যাকাউন্ট আছে? <a id="showLogin">লগইন করুন</a></p>
-<p><a id="forgotPassword">পাসওয়ার্ড ভুলে গেছেন?</a></p>
+<p id="loginLink" class="hidden">আগে থেকেই অ্যাকাউন্ট আছে? <a id="showLogin">লগইন করুন</a></p>
+<p id="forgotLink"><a id="forgotPassword">পাসওয়ার্ড ভুলে গেছেন?</a></p>
+</div>
+<div id="authMessage" class="msg"></div>
+</section>
+
+<section id="dashboard" class="hidden">
+<div class="panel">
+<h2 style="text-align:center">Student Dashboard</h2>
+<p class="user-email" id="studentEmail"></p>
+</div>
+
+<div class="nav">
+<button class="active" data-view="homeView">Dashboard</button>
+<button data-view="profileView">My Profile</button>
+<button data-view="paymentView">Payment</button>
+</div>
+
+<section id="homeView" class="view on">
+<div class="panel">
+<h3>📖 আপনার কোর্স</h3>
+<p>৬০০ মিনিটে কুরআন শিখি</p>
+<p><b>কোর্স ফি: ৳৫০০</b></p>
+<a class="btn" href="course.html">কোর্সে প্রবেশ করুন</a>
+</div>
+
+<div class="panel">
+<h3>💳 পেমেন্টের অবস্থা</h3>
+<div id="paymentStatus" class="small">তথ্য লোড হচ্ছে...</div>
+<button type="button" id="refreshBtn" class="gold">স্ট্যাটাস রিফ্রেশ করুন</button>
 </div>
 </section>
 
-<section id="dashboard">
-<h2>Student Dashboard</h2>
-<p id="studentEmail" style="text-align:center"></p>
-
+<section id="profileView" class="view">
 <div class="panel">
-<h3>আপনার কোর্স</h3>
-<p>৬০০ মিনিটে কুরআন শিখি</p>
-<p><b>কোর্স ফি: ৳৫০০</b></p>
+<h3>👤 My Profile</h3>
+<form id="profileForm">
+<label>আপনার নাম</label>
+<input id="profileName" type="text" placeholder="আপনার নাম">
+
+<label>ইমেইল ঠিকানা</label>
+<input id="profileEmail" type="email" disabled>
+
+<label>মোবাইল নম্বর</label>
+<input id="profilePhone" type="tel" placeholder="01XXXXXXXXX">
+
+<button type="submit" id="profileBtn">প্রোফাইল আপডেট করুন</button>
+</form>
+<div id="profileMessage" class="msg"></div>
 </div>
 
 <div class="panel">
-<h3>পেমেন্ট করুন</h3>
-<p class="small">নিচের যেকোনো একটি মাধ্যমে ৳৫০০ পাঠান।</p>
+<h3>🔐 পাসওয়ার্ড পরিবর্তন</h3>
+<form id="passwordForm">
+<label>নতুন পাসওয়ার্ড</label>
+<input id="newPassword" type="password" minlength="6" required placeholder="নতুন পাসওয়ার্ড লিখুন">
+<label>নতুন পাসওয়ার্ড আবার লিখুন</label>
+<input id="confirmPassword" type="password" minlength="6" required placeholder="পাসওয়ার্ড নিশ্চিত করুন">
+<button type="submit" id="passwordBtn">পাসওয়ার্ড পরিবর্তন করুন</button>
+</form>
+<div id="passwordMessage" class="msg"></div>
+</div>
+</section>
 
-<p><b>বিকাশ (bKash)</b></p>
-<div class="payment-number">01876598566</div>
+<section id="paymentView" class="view">
+<div class="panel">
+<h3>💳 কোর্সের পেমেন্ট</h3>
+<p class="small">বিকাশ অথবা নগদে ৫০০ টাকা পাঠিয়ে নিচের ফর্ম পূরণ করুন।</p>
 
-<p><b>নগদ (Nagad)</b></p>
-<div class="payment-number">01876598566</div>
+<div class="bk">
+<b>বিকাশ (bKash)</b>
+<div class="num">01876598566</div>
+<button type="button" class="copybtn" data-copy="01876598566">নম্বর কপি</button>
+</div>
 
-<p class="small">পেমেন্ট করার পর নিচের ফর্ম পূরণ করুন।</p>
+<div class="bk ng">
+<b>নগদ (Nagad)</b>
+<div class="num">01876598566</div>
+<button type="button" class="copybtn" data-copy="01876598566">নম্বর কপি</button>
+</div>
 
 <form id="paymentForm">
+<label>পেমেন্ট মাধ্যম</label>
 <select id="paymentMethod" required>
-<option value="">পেমেন্ট মাধ্যম নির্বাচন করুন</option>
+<option value="">নির্বাচন করুন</option>
 <option value="bkash">বিকাশ</option>
 <option value="nagad">নগদ</option>
 </select>
 
-<input type="text" id="senderNumber"
-placeholder="যে নম্বর থেকে টাকা পাঠিয়েছেন" required>
+<label>যে নম্বর থেকে টাকা পাঠিয়েছেন</label>
+<input id="senderNumber" type="tel" inputmode="numeric" maxlength="11" placeholder="01XXXXXXXXX" required>
 
-<input type="text" id="transactionId"
-placeholder="Transaction ID লিখুন" required>
+<label>Transaction ID (TrxID)</label>
+<input id="transactionId" type="text" placeholder="Transaction ID লিখুন" required>
 
 <button type="submit" id="paymentBtn">পেমেন্ট তথ্য জমা দিন</button>
 </form>
+<div id="paymentMessage" class="msg"></div>
 </div>
-
-<div class="panel">
-<h3>পেমেন্টের অবস্থা</h3>
-<div id="paymentStatus" class="small">তথ্য লোড হচ্ছে...</div>
-<button type="button" id="refreshBtn">স্ট্যাটাস রিফ্রেশ করুন</button>
-</div>
-
-<button id="logoutBtn">Logout</button>
 </section>
 
-<div id="message"></div>
-</div>
+<button type="button" id="logoutBtn" class="gold">Logout</button>
+</section>
+
+<div id="globalMessage" class="msg"></div>
+</main>
+
+<footer>QuranPath — ৬০০ মিনিটে কুরআন শিখি</footer>
 
 <script type="module">
 import { supabase } from './supabase-config.js';
 
 const $ = id => document.getElementById(id);
-
 let mode = 'login';
 let currentUser = null;
 
-function showMessage(text,color='green'){
-  $('message').textContent=text;
-  $('message').style.color=color;
+function message(id,text,type='ok'){
+  const el=$(id);
+  el.textContent=text;
+  el.className='msg '+type;
 }
 
-function setMode(newMode){
-  mode=newMode;
-  $('name').hidden=mode!=='register';
+function clearMessage(id){
+  $(id).textContent='';
+  $(id).className='msg';
+}
+
+function setMode(next){
+  mode=next;
+  $('registerFields').classList.toggle('hidden',mode!=='register');
   $('name').required=mode==='register';
-  $('formTitle').textContent=mode==='register'
-    ?'Student Registration':'Student Login';
-  $('submitBtn').textContent=mode==='register'
-    ?'Create Account':'Login';
-  $('registerLink').hidden=mode==='register';
-  $('loginLink').hidden=mode!=='register';
-  $('forgotPassword').parentElement.hidden=mode!=='login';
-  showMessage('');
+  $('formTitle').textContent=mode==='register'?'Student Registration':'Student Login';
+  $('submitBtn').textContent=mode==='register'?'অ্যাকাউন্ট তৈরি করুন':'লগইন করুন';
+  $('registerLink').classList.toggle('hidden',mode==='register');
+  $('loginLink').classList.toggle('hidden',mode!=='register');
+  $('forgotLink').classList.toggle('hidden',mode!=='login');
+  clearMessage('authMessage');
 }
 
 $('showRegister').onclick=()=>setMode('register');
@@ -162,7 +268,7 @@ $('showLogin').onclick=()=>setMode('login');
 $('authForm').addEventListener('submit',async e=>{
   e.preventDefault();
   $('submitBtn').disabled=true;
-  showMessage('অপেক্ষা করুন...');
+  message('authMessage','অপেক্ষা করুন...');
 
   try{
     const email=$('email').value.trim();
@@ -171,28 +277,33 @@ $('authForm').addEventListener('submit',async e=>{
 
     if(mode==='register'){
       const name=$('name').value.trim();
-      if(!name) throw new Error('আপনার নাম লিখুন।');
+      const phone=$('regPhone').value.trim();
+
+      if(name.length<2) throw new Error('সঠিক নাম লিখুন।');
+      if(phone && !/^01[0-9]{9}$/.test(phone))
+        throw new Error('সঠিক ১১ সংখ্যার মোবাইল নম্বর লিখুন।');
 
       result=await supabase.auth.signUp({
         email,password,
-        options:{data:{full_name:name}}
+        options:{data:{full_name:name,phone:phone}}
       });
 
       if(result.error) throw result.error;
 
       if(result.data.session){
         await showDashboard(result.data.user);
+        message('globalMessage','রেজিস্ট্রেশন সফল হয়েছে।');
       }else{
-        showMessage('রেজিস্ট্রেশন সফল! ইমেইল চেক করে অ্যাকাউন্ট নিশ্চিত করুন।');
+        message('authMessage','রেজিস্ট্রেশন সফল! ইমেইলে পাঠানো লিংক দিয়ে অ্যাকাউন্ট নিশ্চিত করুন।');
       }
     }else{
       result=await supabase.auth.signInWithPassword({email,password});
       if(result.error) throw result.error;
       await showDashboard(result.data.user);
-      showMessage('লগইন সফল!');
+      message('globalMessage','লগইন সফল হয়েছে।');
     }
   }catch(error){
-    showMessage(error.message,'red');
+    message('authMessage',error.message,'err');
   }finally{
     $('submitBtn').disabled=false;
   }
@@ -201,27 +312,53 @@ $('authForm').addEventListener('submit',async e=>{
 $('forgotPassword').onclick=async()=>{
   const email=$('email').value.trim();
   if(!email){
-    showMessage('প্রথমে আপনার ইমেইল লিখুন।','red');
+    message('authMessage','প্রথমে আপনার ইমেইল লিখুন।','err');
     return;
   }
   try{
-    const {error}=await supabase.auth.resetPasswordForEmail(email);
+    const {error}=await supabase.auth.resetPasswordForEmail(email,{
+      redirectTo:window.location.origin+'/login.html'
+    });
     if(error) throw error;
-    showMessage('পাসওয়ার্ড রিসেটের লিংক ইমেইলে পাঠানো হয়েছে।');
+    message('authMessage','পাসওয়ার্ড রিসেটের লিংক আপনার ইমেইলে পাঠানো হয়েছে।');
   }catch(error){
-    showMessage(error.message,'red');
+    message('authMessage',error.message,'err');
   }
 };
 
+function openView(viewId){
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('on'));
+  $(viewId).classList.add('on');
+  document.querySelectorAll('.nav button').forEach(b=>{
+    b.classList.toggle('active',b.dataset.view===viewId);
+  });
+}
+
+document.querySelectorAll('.nav button').forEach(button=>{
+  button.addEventListener('click',()=>{
+    openView(button.dataset.view);
+  });
+});
+
 async function showDashboard(user){
   currentUser=user;
-  $('authSection').style.display='none';
-  $('dashboard').style.display='block';
+  $('authSection').classList.add('hidden');
+  $('dashboard').classList.remove('hidden');
   $('studentEmail').textContent=user.email||'';
+  fillProfile(user);
+  openView('homeView');
   await loadPaymentStatus();
 }
 
+function fillProfile(user){
+  const meta=user.user_metadata||{};
+  $('profileName').value=meta.full_name||'';
+  $('profileEmail').value=user.email||'';
+  $('profilePhone').value=meta.phone||'';
+}
+
 async function loadPaymentStatus(){
+  if(!currentUser)return;
   $('paymentStatus').textContent='তথ্য লোড হচ্ছে...';
 
   const {data,error}=await supabase
@@ -235,12 +372,12 @@ async function loadPaymentStatus(){
     return;
   }
 
-  if(!data || data.length===0){
+  if(!data||data.length===0){
     $('paymentStatus').textContent='এখনো কোনো পেমেন্ট জমা দেননি।';
     return;
   }
 
-  $('paymentStatus').innerHTML='';
+  $('paymentStatus').replaceChildren();
 
   data.forEach(payment=>{
     const item=document.createElement('div');
@@ -248,43 +385,90 @@ async function loadPaymentStatus(){
 
     const method=payment.payment_method==='bkash'?'বিকাশ':'নগদ';
     const statusText={
-      pending:'Pending - যাচাই করা হচ্ছে',
-      approved:'Approved - পেমেন্ট অনুমোদিত',
-      rejected:'Rejected - পেমেন্ট বাতিল'
+      pending:'Pending — যাচাই করা হচ্ছে',
+      approved:'Approved — পেমেন্ট অনুমোদিত',
+      rejected:'Rejected — পেমেন্ট বাতিল'
     }[payment.status]||payment.status;
+
+    const details=document.createElement('p');
+    details.className='small';
+    details.textContent='মাধ্যম: '+method+
+      ' | নম্বর: '+payment.sender_number+
+      ' | TrxID: '+payment.transaction_id;
 
     const status=document.createElement('div');
     status.className='status '+payment.status;
     status.textContent=statusText;
-
-    const details=document.createElement('p');
-    details.className='small';
-    details.textContent=
-      'মাধ্যম: '+method+
-      ' | নম্বর: '+payment.sender_number+
-      ' | Transaction ID: '+payment.transaction_id;
 
     item.append(details,status);
     $('paymentStatus').append(item);
   });
 }
 
+$('profileForm').addEventListener('submit',async e=>{
+  e.preventDefault();
+  $('profileBtn').disabled=true;
+
+  try{
+    const name=$('profileName').value.trim();
+    const phone=$('profilePhone').value.trim();
+
+    if(name.length<2)throw new Error('সঠিক নাম লিখুন।');
+    if(phone&&!/^01[0-9]{9}$/.test(phone))
+      throw new Error('সঠিক ১১ সংখ্যার মোবাইল নম্বর লিখুন।');
+
+    const {data,error}=await supabase.auth.updateUser({
+      data:{full_name:name,phone:phone}
+    });
+
+    if(error)throw error;
+
+    currentUser=data.user;
+    fillProfile(currentUser);
+    message('profileMessage','আপনার প্রোফাইল আপডেট হয়েছে।');
+  }catch(error){
+    message('profileMessage',error.message,'err');
+  }finally{
+    $('profileBtn').disabled=false;
+  }
+});
+
+$('passwordForm').addEventListener('submit',async e=>{
+  e.preventDefault();
+  $('passwordBtn').disabled=true;
+
+  try{
+    const password=$('newPassword').value;
+    const confirm=$('confirmPassword').value;
+
+    if(password.length<6)throw new Error('পাসওয়ার্ড কমপক্ষে ৬ অক্ষরের হতে হবে।');
+    if(password!==confirm)throw new Error('দুটি পাসওয়ার্ড এক নয়।');
+
+    const {error}=await supabase.auth.updateUser({password});
+    if(error)throw error;
+
+    $('passwordForm').reset();
+    message('passwordMessage','পাসওয়ার্ড সফলভাবে পরিবর্তন হয়েছে।');
+  }catch(error){
+    message('passwordMessage',error.message,'err');
+  }finally{
+    $('passwordBtn').disabled=false;
+  }
+});
+
 $('paymentForm').addEventListener('submit',async e=>{
   e.preventDefault();
-
   $('paymentBtn').disabled=true;
-  showMessage('পেমেন্ট তথ্য জমা হচ্ছে...');
+  clearMessage('paymentMessage');
 
   try{
     const method=$('paymentMethod').value;
     const sender=$('senderNumber').value.trim();
     const trx=$('transactionId').value.trim();
 
-    if(!/^[0-9]{11}$/.test(sender)){
+    if(!/^01[0-9]{9}$/.test(sender))
       throw new Error('সঠিক ১১ সংখ্যার মোবাইল নম্বর লিখুন।');
-    }
-
-    if(!trx) throw new Error('Transaction ID লিখুন।');
+    if(!trx)throw new Error('Transaction ID লিখুন।');
 
     const {data:course,error:courseError}=await supabase
       .from('courses')
@@ -293,28 +477,25 @@ $('paymentForm').addEventListener('submit',async e=>{
       .limit(1)
       .maybeSingle();
 
-    if(courseError) throw courseError;
-    if(!course) throw new Error('কোর্স পাওয়া যায়নি। আগে courses টেবিলে কোর্স যুক্ত করুন।');
+    if(courseError)throw courseError;
+    if(!course)throw new Error('কোর্স পাওয়া যায়নি।');
 
-    const {error}=await supabase
-      .from('payments')
-      .insert({
-        student_id:currentUser.id,
-        course_id:course.id,
-        payment_method:method,
-        sender_number:sender,
-        transaction_id:trx,
-        status:'pending'
-      });
+    const {error}=await supabase.from('payments').insert({
+      student_id:currentUser.id,
+      course_id:course.id,
+      payment_method:method,
+      sender_number:sender,
+      transaction_id:trx,
+      status:'pending'
+    });
 
-    if(error) throw error;
+    if(error)throw error;
 
     $('paymentForm').reset();
-    showMessage('পেমেন্ট তথ্য জমা হয়েছে। যাচাইয়ের জন্য অপেক্ষা করুন।');
+    message('paymentMessage','পেমেন্ট তথ্য জমা হয়েছে। যাচাইয়ের জন্য অপেক্ষা করুন।');
     await loadPaymentStatus();
-
   }catch(error){
-    showMessage(error.message,'red');
+    message('paymentMessage',error.message,'err');
   }finally{
     $('paymentBtn').disabled=false;
   }
@@ -322,30 +503,50 @@ $('paymentForm').addEventListener('submit',async e=>{
 
 $('refreshBtn').onclick=loadPaymentStatus;
 
+document.querySelectorAll('[data-copy]').forEach(button=>{
+  button.addEventListener('click',async()=>{
+    try{
+      await navigator.clipboard.writeText(button.dataset.copy);
+      const old=button.textContent;
+      button.textContent='কপি হয়েছে ✓';
+      setTimeout(()=>button.textContent=old,1500);
+    }catch{
+      message('globalMessage','নম্বর কপি করা যায়নি। নিজে কপি করুন।','err');
+    }
+  });
+});
+
 $('logoutBtn').onclick=async()=>{
   const {error}=await supabase.auth.signOut();
   if(error){
-    showMessage(error.message,'red');
+    message('globalMessage',error.message,'err');
     return;
   }
+
   currentUser=null;
-  $('dashboard').style.display='none';
-  $('authSection').style.display='block';
+  $('dashboard').classList.add('hidden');
+  $('authSection').classList.remove('hidden');
   $('authForm').reset();
   setMode('login');
-  showMessage('আপনি লগআউট করেছেন।');
+  message('globalMessage','আপনি লগআউট করেছেন।');
 };
 
 async function checkLogin(){
   const {data,error}=await supabase.auth.getSession();
   if(error){
-    showMessage(error.message,'red');
+    message('globalMessage',error.message,'err');
     return;
   }
-  if(data.session){
-    await showDashboard(data.session.user);
-  }
+  if(data.session)await showDashboard(data.session.user);
 }
+
+supabase.auth.onAuthStateChange((event,session)=>{
+  if(event==='PASSWORD_RECOVERY'){
+    $('authSection').classList.remove('hidden');
+    $('dashboard').classList.add('hidden');
+    message('authMessage','এখন নতুন পাসওয়ার্ড সেট করতে পারবেন।');
+  }
+});
 
 checkLogin();
 </script>
