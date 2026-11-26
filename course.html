@@ -1,128 +1,4 @@
 
-<!DOCTYPE html>
-<html lang="bn">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>৬০০ মিনিটে কুরআন শিখি — ফ্রি ক্লাস</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Amiri:wght@400;700&display=swap">
-<style>
-:root{--bg:#f6f1e4;--surface:#fffdf6;--ink:#1d2b24;--muted:#5d6b63;--green:#0f5b43;--green2:#0b3f2f;--gold:#b98a2e;--line:#e4d9bb;--on-green:#fffdf6;--red:#c0392b;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0d1a15;--surface:#14251e;--ink:#eee8d5;--muted:#a3b2a9;--green:#1b7d5d;--green2:#08241b;--gold:#d9ae55;--line:#2a4136;--red:#ff7a6b}}
-:root[data-theme="dark"]{--bg:#0d1a15;--surface:#14251e;--ink:#eee8d5;--muted:#a3b2a9;--green:#1b7d5d;--green2:#08241b;--gold:#d9ae55;--line:#2a4136;--red:#ff7a6b}
-html{scroll-padding-top:env(safe-area-inset-top,0px)}
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:"Hind Siliguri",system-ui,sans-serif;line-height:1.6}
-.top{background:linear-gradient(180deg,var(--green2),var(--green));color:var(--on-green);padding:14px 16px;display:flex;align-items:center;gap:12px}
-.top a{color:var(--on-green);text-decoration:none;font-size:14px;opacity:.9}
-.top h1{margin:0;font-size:clamp(16px,4.2vw,21px);flex:1;line-height:1.35}
-.badge{background:var(--gold);color:#1d1606;font-size:12px;font-weight:700;border-radius:99px;padding:2px 10px;white-space:nowrap}
-main{max-width:980px;margin:0 auto;padding:16px 14px 90px;display:grid;gap:16px}
-.stage{position:relative;aspect-ratio:16/9;background:#06130e;border-radius:16px;overflow:hidden;border:2px solid var(--gold);box-shadow:0 8px 22px rgba(0,0,0,.2)}
-.stage iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:#000;display:none}
-.stage.playing iframe{display:block}
-.cover{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;color:#fffdf6;text-align:center;padding:12px;border:0;width:100%;cursor:pointer;font-family:inherit;background:radial-gradient(circle at 50% 40%,var(--c1,#1b7d5d),var(--c2,#08241b))}
-.stage.playing .cover{display:none}
-.cover .ar{font-family:Amiri,serif;font-size:clamp(22px,6vw,40px);color:#e8c878}
-.play{width:68px;height:68px;border-radius:50%;background:var(--gold);display:grid;place-items:center;box-shadow:0 0 0 8px rgba(217,174,85,.25)}
-.play svg{width:28px;height:28px;margin-left:4px;fill:#1d1606}
-.cover small{opacity:.85;font-size:13px}
-.soon{position:absolute;bottom:10px;left:0;right:0;text-align:center;font-size:12px;color:#e8c878}
-.watermark{position:absolute;bottom:10px;right:10px;z-index:2;color:white;background:rgba(0,0,0,.55);padding:3px 8px;border-radius:5px;font-size:11px;pointer-events:none}
-.bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between}
-.bar h2{margin:0;font-size:19px;flex:1 1 200px}
-.ctl{display:flex;gap:8px}
-.chip{background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:10px;padding:7px 12px;font:600 14px "Hind Siliguri",sans-serif;cursor:pointer}
-.chip:hover{border-color:var(--gold)}
-.chip:disabled{opacity:.4;cursor:default}
-.prog{height:6px;border-radius:9px;background:var(--line);overflow:hidden}
-.prog i{display:block;height:100%;width:0;background:var(--gold);transition:width .3s}
-h3.sec{margin:6px 0 0;font-size:18px;color:var(--green)}
-.free{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
-.vc{background:var(--surface);border:2px solid var(--line);border-radius:14px;overflow:hidden;cursor:pointer;text-align:left;padding:0;font-family:inherit;color:inherit;display:block;width:100%}
-.vc.on{border-color:var(--gold);box-shadow:0 0 0 3px rgba(185,138,46,.25)}
-.th{position:relative;aspect-ratio:16/9;display:grid;place-items:center;background:radial-gradient(circle at 50% 40%,var(--c1),var(--c2));color:#e8c878;font-family:Amiri,serif;font-size:26px}
-.th img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.th .mini{position:absolute;right:8px;bottom:8px;background:rgba(0,0,0,.65);color:#fff;font:600 12px "Hind Siliguri";border-radius:6px;padding:1px 7px}
-.th .fb{position:absolute;left:8px;top:8px;background:var(--gold);color:#1d1606;font:700 11px "Hind Siliguri";border-radius:6px;padding:1px 8px}
-.vc .t{padding:10px 12px;font-weight:600;font-size:15px;line-height:1.4}
-.vc .t span{display:block;color:var(--muted);font-weight:400;font-size:13px}
-.list{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden}
-.row{display:flex;gap:12px;align-items:center;padding:12px 14px;border-bottom:1px solid var(--line);width:100%;background:none;border-left:0;border-right:0;border-top:0;font-family:inherit;color:inherit;text-align:left;cursor:pointer;font-size:15px}
-.row:last-child{border-bottom:0}
-.row:hover{background:rgba(185,138,46,.08)}
-.row .n{width:30px;height:30px;border-radius:50%;background:var(--line);display:grid;place-items:center;font-weight:700;font-size:13px;flex:none}
-.row .lk{margin-left:auto;color:var(--muted);flex:none}
-.row.cur .n{background:var(--gold);color:#1d1606}
-.row.lock{color:var(--muted)}
-.buy{position:fixed;left:0;right:0;bottom:0;background:var(--surface);border-top:1px solid var(--line);padding:10px 14px calc(10px + env(safe-area-inset-bottom,0px));display:flex;gap:12px;align-items:center;justify-content:center;z-index:5}
-.price{display:flex;align-items:baseline;gap:8px}
-.old{color:var(--red);text-decoration:line-through}
-.new{color:var(--green);font-weight:700;font-size:22px}
-.btn{background:var(--gold);color:#1d1606;border:0;border-radius:10px;padding:11px 22px;font:700 16px "Hind Siliguri",sans-serif;text-decoration:none;cursor:pointer}
-.modal{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;place-items:center;z-index:9;padding:16px}
-.modal.on{display:grid}
-.mb{background:var(--surface);border:2px solid var(--gold);border-radius:16px;padding:22px;max-width:380px;text-align:center}
-.mb h4{margin:0 0 6px;font-size:20px}
-.mb p{margin:0 0 14px;color:var(--muted)}
-.mb .x{display:block;margin:12px auto 0;background:none;border:0;color:var(--muted);font:inherit;cursor:pointer}
-#accountStatus{font-size:13px;color:var(--muted);text-align:center}
-</style>
-</head>
-<body>
-
-<header class="top">
-  <a href="index.html" id="back">← সব কোর্স</a>
-  <h1>৬০০ মিনিটে কুরআন শিখি</h1>
-  <span class="badge" id="courseBadge">ফ্রি প্রিভিউ</span>
-</header>
-
-<main>
-  <div class="stage" id="stage">
-    <iframe id="ytFrame" title="QuranPath Video Player"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-      allowfullscreen></iframe>
-    <button class="cover" id="cover" aria-label="ভিডিও চালু করুন">
-      <span class="ar">بِسْمِ ٱللَّهِ</span>
-      <span class="play"><svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z"/></svg></span>
-      <small id="cvt"></small>
-      <span class="soon" id="soon" hidden>ভিডিও লিংক পাওয়া যায়নি</span>
-    </button>
-    <div class="watermark" id="watermark" hidden>QuranPath</div>
-  </div>
-
-  <div class="bar">
-    <h2 id="ttl"></h2>
-    <div class="ctl">
-      <button class="chip" id="prev">← আগের</button>
-      <button class="chip" id="next">পরের →</button>
-    </div>
-  </div>
-  <div class="prog" aria-hidden="true"><i id="pg"></i></div>
-  <div id="accountStatus">কোর্সের তথ্য লোড হচ্ছে...</div>
-
-  <h3 class="sec">🎬 ফ্রি দেখুন (২টি ক্লাস)</h3>
-  <div class="free" id="free"></div>
-
-  <h3 class="sec">📚 কোর্সের বাকি ক্লাস</h3>
-  <div class="list" id="list"></div>
-</main>
-
-<div class="buy">
-  <div class="price"><span class="old">১৫০০ টাকা</span><span class="new">৫০০ টাকা</span></div>
-  <a class="btn" href="login.html" id="buy">এখনই কিনুন</a>
-</div>
-
-<div class="modal" id="modal">
-  <div class="mb">
-    <h4>🔒 এই ক্লাসটি লক করা</h4>
-    <p id="modalMessage">সম্পূর্ণ কোর্সের সব ক্লাস দেখতে কোর্সটি কিনুন এবং Admin Approval নিন।</p>
-    <a class="btn" href="login.html" style="display:inline-block" id="modalBuy">৫০০ টাকায় কিনুন</a>
-    <button class="x" id="mx">পরে দেখব</button>
-  </div>
-</div>
-
-<script type="module">
 import { supabase } from './supabase-config.js';
 
 const $ = id => document.getElementById(id);
@@ -131,35 +7,27 @@ const bn = n => String(n).replace(/\d/g, d => BN[d]);
 
 const FREE_DEFAULT = [
   {
-    t:'ক্লাস ১: আরবি হরফ পরিচিতি',
-    d:'১০ মিনিট',
-    url:'https://youtu.be/YfBzJwK6osw',
-    c1:'#1b7d5d',c2:'#08241b',ar:'ا ب ت'
+    t: 'ক্লাস ১: আরবি হরফ পরিচিতি',
+    d: 'ফ্রি ক্লাস',
+    url: 'https://youtu.be/YfBzJwK6osw',
+    c1: '#1b7d5d',
+    c2: '#08241b',
+    ar: 'ا ب ت'
   },
   {
-    t:'ক্লাস ২: যবর, যের, পেশ',
-    d:'১২ মিনিট',
-    url:'https://youtu.be/WrgIpI5m86I',
-    c1:'#b98a2e',c2:'#4a3410',ar:'بَ بِ بُ'
+    t: 'ক্লাস ২: যবর, যের, পেশ',
+    d: 'ফ্রি ক্লাস',
+    url: 'https://youtu.be/WrgIpI5m86I',
+    c1: '#b98a2e',
+    c2: '#4a3410',
+    ar: 'بَ بِ بُ'
   }
 ];
 
-const LOCKED = [
- 'ক্লাস ৩: মুশকিল হরফের উচ্চারণ',
- 'ক্লাস ৪: যুক্ত হরফ চেনা',
- 'ক্লাস ৫: তানবীন ও সাকিন',
- 'ক্লাস ৬: মাদ্দের নিয়ম',
- 'ক্লাস ৭: গুন্নাহ ও তাশদীদ',
- 'ক্লাস ৮: সূরা আল-ফাতিহা',
- 'ক্লাস ৯: সূরা আল-ইখলাস',
- '🎁 বোনাস: নামাজের ১০টি সূরার মাশক্ব'
-];
-
 let FREE = [];
-let premiumLesson = null;
+let PREMIUM = [];
 let isApproved = false;
 let current = null;
-let currentIndex = 0;
 let userEmail = '';
 
 const store = {
@@ -176,21 +44,36 @@ const store = {
 function youtubeEmbed(url) {
   try {
     const u = new URL(url);
-    const host = u.hostname.replace(/^www\./,'');
+    const host = u.hostname.replace(/^www\./, '');
+
     if (host === 'youtu.be') {
       const id = u.pathname.split('/').filter(Boolean)[0];
-      return id ? 'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(id) : '';
+      return id
+        ? 'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(id)
+        : '';
     }
+
     if (host.includes('youtube.com')) {
       const list = u.searchParams.get('list');
+
       if (list) {
-        return 'https://www.youtube-nocookie.com/embed/videoseries?list=' + encodeURIComponent(list);
+        return 'https://www.youtube-nocookie.com/embed/videoseries?list='
+          + encodeURIComponent(list);
       }
+
       const id = u.searchParams.get('v');
-      if (id) return 'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(id);
-      if (u.pathname.startsWith('/embed/')) return 'https://www.youtube-nocookie.com' + u.pathname;
+
+      if (id) {
+        return 'https://www.youtube-nocookie.com/embed/'
+          + encodeURIComponent(id);
+      }
+
+      if (u.pathname.startsWith('/embed/')) {
+        return 'https://www.youtube-nocookie.com' + u.pathname;
+      }
     }
   } catch(e) {}
+
   return '';
 }
 
@@ -199,77 +82,123 @@ function showModal(message) {
   $('modal').classList.add('on');
 }
 
-function updateProgress() {
-  const done = FREE.filter((v,i) => store.get('qp_done' + i) === '1').length;
-  $('pg').style.width = (FREE.length ? done / FREE.length * 100 : 0) + '%';
+function allPlayable() {
+  return isApproved ? [...FREE, ...PREMIUM] : [...FREE];
 }
 
-function selectFree(index, autoplay) {
-  if (index < 0 || index >= FREE.length) return;
-  current = { ...FREE[index], type:'free', index };
-  currentIndex = index;
-  showCurrent(autoplay);
-}
+function showCurrent(video, autoplay = false) {
+  if (!video) return;
 
-function selectPremium(autoplay) {
-  if (!isApproved || !premiumLesson) {
-    showModal('প্রিমিয়াম ক্লাস দেখতে প্রথমে কোর্সের পেমেন্ট সম্পন্ন করুন। Admin Approval হলে ক্লাস চালু হবে।');
-    return;
-  }
-  current = {
-    t: premiumLesson.title || 'প্রিমিয়াম কুরআন শিক্ষা কোর্স',
-    d:'৫০টি প্রিমিয়াম ক্লাস',
-    url:premiumLesson.youtube_url,
-    c1:'#b98a2e',c2:'#4a3410',ar:'الْقُرْآن',
-    type:'premium'
-  };
-  showCurrent(autoplay);
-}
+  current = video;
 
-function showCurrent(autoplay) {
-  const embed = youtubeEmbed(current.url);
+  const embed = youtubeEmbed(video.url);
+
   $('ytFrame').src = '';
   $('stage').classList.remove('playing');
-  $('cover').style.setProperty('--c1', current.c1);
-  $('cover').style.setProperty('--c2', current.c2);
-  $('cvt').textContent = current.t + ' • ' + current.d;
-  $('ttl').textContent = current.t;
+
+  $('cover').style.setProperty('--c1', video.c1 || '#1b7d5d');
+  $('cover').style.setProperty('--c2', video.c2 || '#08241b');
+
+  $('cvt').textContent = video.t + ' • ' + video.d;
+  $('ttl').textContent = video.t;
+
   $('soon').hidden = !!embed;
+
   $('watermark').hidden = !userEmail;
   $('watermark').textContent = userEmail || 'QuranPath';
 
-  $('prev').disabled = current.type !== 'free' || current.index === 0;
-  $('next').disabled = current.type !== 'free' || current.index === FREE.length - 1;
+  const videos = allPlayable();
+  const index = videos.findIndex(v => v.key === video.key);
+
+  $('prev').disabled = index <= 0;
+  $('next').disabled = index < 0 || index >= videos.length - 1;
 
   render();
+
   if (autoplay) startPlay();
 }
 
 function startPlay() {
   if (!current) return;
+
   const embed = youtubeEmbed(current.url);
+
   if (!embed) {
     $('soon').hidden = false;
     return;
   }
-  $('ytFrame').src = embed + (embed.includes('?') ? '&' : '?') + 'autoplay=1&rel=0';
+
+  $('ytFrame').src =
+    embed + (embed.includes('?') ? '&' : '?') + 'autoplay=1&rel=0';
+
   $('stage').classList.add('playing');
   $('watermark').hidden = !userEmail;
 }
 
+function selectVideo(video, autoplay = true) {
+  if (video.premium && !isApproved) {
+    showModal(
+      'এই প্রিমিয়াম ক্লাসটি দেখতে ৳৫০০ পেমেন্ট করে Admin Approval নিতে হবে।'
+    );
+    return;
+  }
+
+  showCurrent(video, autoplay);
+}
+
+function updateProgress() {
+  const videos = allPlayable();
+
+  const done = videos.filter(v =>
+    store.get('qp_done_' + v.key) === '1'
+  ).length;
+
+  $('pg').style.width =
+    (videos.length ? done / videos.length * 100 : 0) + '%';
+}
+
+function makeRow(number, title, active, locked, callback) {
+  const r = document.createElement('button');
+
+  r.className =
+    'row' + (active ? ' cur' : '') + (locked ? ' lock' : '');
+
+  const n = document.createElement('span');
+  n.className = 'n';
+  n.textContent = bn(number);
+
+  const name = document.createElement('span');
+  name.textContent = title;
+
+  const lk = document.createElement('span');
+  lk.className = 'lk';
+  lk.textContent = locked ? '🔒' : '▶';
+
+  r.append(n, name, lk);
+  r.addEventListener('click', callback);
+
+  return r;
+}
+
 function render() {
   const freeBox = $('free');
-  freeBox.innerHTML = '';
+  const list = $('list');
 
-  FREE.forEach((v,i) => {
+  freeBox.innerHTML = '';
+  list.innerHTML = '';
+
+  FREE.forEach((video, i) => {
     const b = document.createElement('button');
-    b.className = 'vc' + (current?.type === 'free' && current.index === i ? ' on' : '');
-    b.style.setProperty('--c1',v.c1);
-    b.style.setProperty('--c2',v.c2);
+
+    b.className =
+      'vc' + (current?.key === video.key ? ' on' : '');
+
+    b.style.setProperty('--c1', video.c1);
+    b.style.setProperty('--c2', video.c2);
 
     const th = document.createElement('div');
     th.className = 'th';
-    th.textContent = v.ar;
+    th.textContent = video.ar || 'ا ب ت';
 
     const fb = document.createElement('span');
     fb.className = 'fb';
@@ -277,163 +206,240 @@ function render() {
 
     const mini = document.createElement('span');
     mini.className = 'mini';
-    mini.textContent = v.d;
-    th.append(fb,mini);
+    mini.textContent = video.d;
+
+    th.append(fb, mini);
 
     const title = document.createElement('div');
     title.className = 't';
-    title.textContent = v.t;
+    title.textContent = video.t;
 
     const subtitle = document.createElement('span');
-    subtitle.textContent = store.get('qp_done'+i) === '1' ? '✅ দেখা হয়েছে' : '▶ দেখতে ক্লিক করুন';
+
+    subtitle.textContent =
+      store.get('qp_done_' + video.key) === '1'
+        ? '✅ দেখা হয়েছে'
+        : '▶ দেখতে ক্লিক করুন';
+
     title.appendChild(subtitle);
+    b.append(th, title);
 
-    b.append(th,title);
-    b.addEventListener('click', () => selectFree(i,true));
+    b.addEventListener('click', () => selectVideo(video));
+
     freeBox.appendChild(b);
+
+    list.appendChild(
+      makeRow(
+        i + 1,
+        video.t,
+        current?.key === video.key,
+        false,
+        () => selectVideo(video)
+      )
+    );
   });
 
-  const list = $('list');
-  list.innerHTML = '';
-
-  FREE.forEach((v,i) => {
-    list.appendChild(makeRow(i+1,v.t,current?.type === 'free' && current.index === i,false,() => selectFree(i,true)));
-  });
-
-  if (isApproved && premiumLesson) {
-    list.appendChild(makeRow(3,'প্রিমিয়াম কোর্স — ৫০টি ক্লাস',current?.type === 'premium',false,() => selectPremium(true)));
-  } else {
-    LOCKED.forEach((t,i) => {
-      list.appendChild(makeRow(i+3,t,false,true,() => {
-        showModal('এই প্রিমিয়াম ক্লাসটি দেখতে ৳৫০০ পেমেন্ট করে Admin Approval নিতে হবে।');
-      }));
+  if (isApproved) {
+    PREMIUM.forEach(video => {
+      list.appendChild(
+        makeRow(
+          video.lesson_number,
+          video.t,
+          current?.key === video.key,
+          false,
+          () => selectVideo(video)
+        )
+      );
     });
+  } else {
+    for (let i = 3; i <= 10; i++) {
+      list.appendChild(
+        makeRow(
+          i,
+          'প্রিমিয়াম ক্লাস ' + bn(i),
+          false,
+          true,
+          () => showModal(
+            'এই ক্লাসটি দেখতে ৳৫০০ পেমেন্ট করে Admin Approval নিতে হবে।'
+          )
+        )
+      );
+    }
   }
+
   updateProgress();
-}
-
-function makeRow(n,title,active,locked,callback) {
-  const r = document.createElement('button');
-  r.className = 'row' + (active ? ' cur' : '') + (locked ? ' lock' : '');
-
-  const number = document.createElement('span');
-  number.className = 'n';
-  number.textContent = bn(n);
-
-  const name = document.createElement('span');
-  name.textContent = title;
-
-  const lock = document.createElement('span');
-  lock.className = 'lk';
-  lock.textContent = locked ? '🔒' : '▶';
-
-  r.append(number,name,lock);
-  r.addEventListener('click',callback);
-  return r;
 }
 
 async function loadCourse() {
   $('accountStatus').textContent = 'কোর্সের তথ্য লোড হচ্ছে...';
 
-  const { data: authData } = await supabase.auth.getUser();
-  const user = authData?.user || null;
-  userEmail = user?.email || '';
+  try {
+    const { data: authData, error: authError } =
+      await supabase.auth.getUser();
 
-  let paymentStatus = '';
+    if (authError) throw authError;
 
-  if (user) {
-    const { data: payment } = await supabase
-      .from('payments')
-      .select('status')
-      .eq('student_id',user.id)
-      .order('created_at',{ascending:false})
-      .limit(1)
-      .maybeSingle();
+    const user = authData?.user || null;
 
-    paymentStatus = payment?.status || '';
-  }
+    userEmail = user?.email || '';
 
-  const { data: lessonData, error } = await supabase
-    .from('lessons')
-    .select('id,title,youtube_url,is_free,lesson_number')
-    .order('lesson_number',{ascending:true});
+    let paymentRows = [];
 
-  if (error) {
-    console.error('Lessons error:',error);
-    $('accountStatus').textContent = 'ক্লাস লোড করা যায়নি। Supabase permission পরীক্ষা করুন।';
-    FREE = FREE_DEFAULT;
+    if (user) {
+      const { data, error } = await supabase
+        .from('payments')
+        .select('status,created_at')
+        .eq('student_id', user.id)
+        .order('created_at', { ascending: false });
+
+      if (error) throw error;
+
+      paymentRows = data || [];
+    }
+
+    const approvedPayment =
+      paymentRows.some(p => p.status === 'approved');
+
+    const latestPayment = paymentRows[0]?.status || '';
+
+    const { data: lessonData, error: lessonError } =
+      await supabase
+        .from('lessons')
+        .select('id,title,youtube_url,is_free,lesson_number')
+        .order('lesson_number', { ascending: true });
+
+    if (lessonError) throw lessonError;
+
+    const rows = lessonData || [];
+
+    const freeRows = rows.filter(v => v.is_free === true);
+    const premiumRows = rows.filter(v => v.is_free === false);
+
+    FREE = FREE_DEFAULT.map((fallback, i) => {
+      const db = freeRows.find(
+        v => Number(v.lesson_number) === i + 1
+      ) || freeRows[i];
+
+      return {
+        ...fallback,
+        key: 'lesson_' + (db?.id || i + 1),
+        id: db?.id || null,
+        lesson_number: i + 1,
+        t: db?.title &&
+          !['ফ্রি ভিডিও ১', 'ফ্রি ভিডিও ২'].includes(db.title)
+            ? db.title
+            : fallback.t,
+        url: db?.youtube_url || fallback.url,
+        premium: false
+      };
+    });
+
+    PREMIUM = premiumRows.map((v, i) => ({
+      key: 'lesson_' + v.id,
+      id: v.id,
+      lesson_number: Number(v.lesson_number),
+      t: v.title || 'প্রিমিয়াম ক্লাস ' + bn(i + 3),
+      d: 'প্রিমিয়াম ক্লাস',
+      url: v.youtube_url,
+      c1: '#b98a2e',
+      c2: '#4a3410',
+      ar: 'الْقُرْآن',
+      premium: true
+    }));
+
+    isApproved = approvedPayment && PREMIUM.length > 0;
+
+    if (isApproved) {
+      $('courseBadge').textContent = 'প্রিমিয়াম চালু';
+      $('accountStatus').textContent =
+        '✅ পেমেন্ট Approved — আপনার প্রিমিয়াম ক্লাসগুলো চালু হয়েছে।';
+
+      $('buy').textContent = 'প্রিমিয়াম চালু হয়েছে';
+      $('buy').href = 'login.html';
+    } else if (latestPayment === 'pending') {
+      $('courseBadge').textContent = 'যাচাই চলছে';
+      $('accountStatus').textContent =
+        '⏳ আপনার পেমেন্ট যাচাইয়ের অপেক্ষায় আছে।';
+    } else if (latestPayment === 'rejected') {
+      $('courseBadge').textContent = 'পেমেন্ট Rejected';
+      $('accountStatus').textContent =
+        'পেমেন্ট গ্রহণ করা হয়নি। তথ্য যাচাই করে আবার জমা দিন।';
+    } else if (!user) {
+      $('courseBadge').textContent = 'ফ্রি প্রিভিউ';
+      $('accountStatus').textContent =
+        'ফ্রি ক্লাস দেখতে পারবেন। প্রিমিয়াম ক্লাসের জন্য লগইন ও পেমেন্ট প্রয়োজন।';
+    } else {
+      $('courseBadge').textContent = 'ফ্রি প্রিভিউ';
+      $('accountStatus').textContent =
+        'আপনি এখন ফ্রি ক্লাস দেখতে পারবেন। প্রিমিয়াম কোর্সের জন্য পেমেন্ট করুন।';
+    }
+
+    if (approvedPayment && PREMIUM.length === 0) {
+      $('accountStatus').textContent =
+        'পেমেন্ট Approved, কিন্তু প্রিমিয়াম ক্লাস লোড হয়নি। Supabase-এর lessons permission পরীক্ষা করুন।';
+    }
+
     render();
-    selectFree(0,false);
-    return;
+
+    if (FREE.length) {
+      showCurrent(FREE[0], false);
+    }
+
+  } catch (error) {
+    console.error('QuranPath course error:', error);
+
+    $('accountStatus').textContent =
+      'কোর্সের তথ্য লোড করা যায়নি। ইন্টারনেট ও Supabase permission পরীক্ষা করুন।';
+
+    FREE = FREE_DEFAULT.map((v, i) => ({
+      ...v,
+      key: 'free_' + (i + 1),
+      lesson_number: i + 1,
+      premium: false
+    }));
+
+    PREMIUM = [];
+    isApproved = false;
+
+    render();
+    showCurrent(FREE[0], false);
   }
-
-  const rows = lessonData || [];
-  const freeRows = rows.filter(x => x.is_free === true);
-  const premiumRows = rows.filter(x => x.is_free === false);
-
-  FREE = FREE_DEFAULT.map((fallback,i) => {
-    const dbLesson = freeRows.find(x => Number(x.lesson_number) === i+1) || freeRows[i];
-    return {
-      ...fallback,
-      id: dbLesson?.id || null,
-      t: dbLesson?.title && !['ফ্রি ভিডিও ১','ফ্রি ভিডিও ২'].includes(dbLesson.title)
-        ? dbLesson.title : fallback.t,
-      url: dbLesson?.youtube_url || fallback.url
-    };
-  });
-
-  premiumLesson = premiumRows[0] || null;
-  isApproved = paymentStatus === 'approved' && !!premiumLesson;
-
-  if (isApproved) {
-    $('courseBadge').textContent = 'প্রিমিয়াম চালু';
-    $('accountStatus').textContent = '✅ পেমেন্ট Approved — প্রিমিয়াম কোর্স চালু আছে।';
-    $('buy').textContent = 'কোর্স চালু হয়েছে';
-    $('buy').href = 'course.html';
-  } else if (paymentStatus === 'pending') {
-    $('courseBadge').textContent = 'যাচাই চলছে';
-    $('accountStatus').textContent = '⏳ আপনার পেমেন্ট যাচাইয়ের অপেক্ষায় আছে।';
-  } else if (paymentStatus === 'rejected') {
-    $('courseBadge').textContent = 'পেমেন্ট Rejected';
-    $('accountStatus').textContent = 'পেমেন্ট গ্রহণ করা হয়নি। তথ্য যাচাই করে আবার জমা দিন।';
-  } else if (!user) {
-    $('courseBadge').textContent = 'ফ্রি প্রিভিউ';
-    $('accountStatus').textContent = 'ফ্রি ক্লাস দেখতে পারবেন। প্রিমিয়াম ক্লাসের জন্য লগইন ও পেমেন্ট প্রয়োজন।';
-  } else {
-    $('courseBadge').textContent = 'ফ্রি প্রিভিউ';
-    $('accountStatus').textContent = 'আপনি এখন ফ্রি ক্লাস দেখতে পারবেন। প্রিমিয়াম কোর্সের জন্য পেমেন্ট করুন।';
-  }
-
-  render();
-  selectFree(0,false);
 }
 
-$('cover').addEventListener('click',startPlay);
+$('cover').addEventListener('click', startPlay);
 
-$('prev').addEventListener('click',() => {
-  if (current?.type === 'free' && current.index > 0) {
-    selectFree(current.index-1,true);
+$('prev').addEventListener('click', () => {
+  const videos = allPlayable();
+  const index = videos.findIndex(v => v.key === current?.key);
+
+  if (index > 0) {
+    selectVideo(videos[index - 1]);
   }
 });
 
-$('next').addEventListener('click',() => {
-  if (current?.type === 'free' && current.index < FREE.length-1) {
-    selectFree(current.index+1,true);
+$('next').addEventListener('click', () => {
+  const videos = allPlayable();
+  const index = videos.findIndex(v => v.key === current?.key);
+
+  if (index >= 0 && index < videos.length - 1) {
+    selectVideo(videos[index + 1]);
   }
 });
 
-$('mx').addEventListener('click',() => $('modal').classList.remove('on'));
-$('modal').addEventListener('click',e => {
-  if (e.target === $('modal')) $('modal').classList.remove('on');
+$('mx').addEventListener('click', () => {
+  $('modal').classList.remove('on');
 });
 
-document.addEventListener('contextmenu',e => e.preventDefault());
+$('modal').addEventListener('click', e => {
+  if (e.target === $('modal')) {
+    $('modal').classList.remove('on');
+  }
+});
+
+document.addEventListener('contextmenu', e => e.preventDefault());
 
 supabase.auth.onAuthStateChange(() => {
   loadCourse();
 });
 
 loadCourse();
-</script>
-</body>
-</html>
