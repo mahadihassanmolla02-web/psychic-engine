@@ -1,0 +1,316 @@
+
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QuranPath - Admin Dashboard</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  background: #f1f5f9;
+  color: #1e293b;
+}
+
+.container {
+  max-width: 1100px;
+  margin: auto;
+}
+
+.header {
+  background: #064e3b;
+  color: white;
+  padding: 22px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  margin: 0 0 8px;
+}
+
+.card {
+  background: white;
+  padding: 18px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 10px #00000010;
+}
+
+button {
+  border: none;
+  padding: 10px 16px;
+  border-radius: 7px;
+  cursor: pointer;
+  color: white;
+  font-weight: bold;
+  margin: 3px;
+}
+
+.refresh {
+  background: #2563eb;
+}
+
+.approve {
+  background: #16a34a;
+}
+
+.reject {
+  background: #dc2626;
+}
+
+.logout {
+  background: #475569;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 850px;
+}
+
+th, td {
+  padding: 12px;
+  border-bottom: 1px solid #e2e8f0;
+  text-align: left;
+  font-size: 14px;
+}
+
+th {
+  background: #ecfdf5;
+}
+
+.table-wrap {
+  overflow-x: auto;
+}
+
+.status {
+  font-weight: bold;
+}
+
+.pending {
+  color: #d97706;
+}
+
+.approved {
+  color: #16a34a;
+}
+
+.rejected {
+  color: #dc2626;
+}
+
+#message {
+  margin-top: 12px;
+  font-weight: bold;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <div class="header">
+    <h1>QuranPath Admin Dashboard</h1>
+    <p>পেমেন্ট ম্যানেজমেন্ট সিস্টেম</p>
+    <p id="adminEmail">লোড হচ্ছে...</p>
+    <button class="refresh" onclick="loadPayments()">
+      Refresh Payments
+    </button>
+    <button class="logout" onclick="logout()">
+      Logout
+    </button>
+  </div>
+
+  <div class="card">
+    <h2>Payment Requests</h2>
+    <div id="message">পেমেন্ট লোড হচ্ছে...</div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Student ID</th>
+            <th>Method</th>
+            <th>Sender Number</th>
+            <th>Transaction ID</th>
+            <th>Status</th>
+            <th>Date</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+
+        <tbody id="paymentList">
+          <tr>
+            <td colspan="7">লোড হচ্ছে...</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<script type="module">
+
+import { supabase } from './supabase-config.js';
+
+const message = document.getElementById('message');
+const paymentList = document.getElementById('paymentList');
+
+let currentUser = null;
+
+async function checkAdmin() {
+
+  const { data, error } = await supabase.auth.getUser();
+
+  if (error || !data.user) {
+    alert('প্রথমে Admin হিসেবে Login করুন।');
+    window.location.href = './login.html';
+    return false;
+  }
+
+  currentUser = data.user;
+
+  document.getElementById('adminEmail').textContent =
+    'Admin: ' + currentUser.email;
+
+  const { data: isAdmin, error: adminError } =
+    await supabase.rpc('is_quranpath_admin');
+
+  if (adminError || isAdmin !== true) {
+    alert('আপনার Admin permission নেই।');
+    window.location.href = './login.html';
+    return false;
+  }
+
+  return true;
+}
+
+window.loadPayments = async function() {
+
+  message.textContent = 'পেমেন্ট লোড হচ্ছে...';
+  paymentList.innerHTML = '';
+
+  const { data, error } = await supabase
+    .from('payments')
+    .select('*')
+    .order('created_at', { ascending: false });
+
+  if (error) {
+    message.textContent = 'Error: ' + error.message;
+    return;
+  }
+
+  if (!data || data.length === 0) {
+    message.textContent = 'এখনো কোনো Payment Request নেই।';
+    return;
+  }
+
+  message.textContent = 'মোট Payment Request: ' + data.length;
+
+  data.forEach(payment => {
+
+    const tr = document.createElement('tr');
+
+    const values = [
+      payment.student_id || '-',
+      payment.payment_method || '-',
+      payment.sender_number || '-',
+      payment.transaction_id || '-',
+      payment.status || '-',
+      payment.created_at
+        ? new Date(payment.created_at).toLocaleString('bn-BD')
+        : '-'
+    ];
+
+    values.forEach((value, index) => {
+      const td = document.createElement('td');
+
+      if (index === 4) {
+        td.className = 'status ' + value;
+      }
+
+      td.textContent = value;
+      tr.appendChild(td);
+    });
+
+    const actionCell = document.createElement('td');
+
+    if (payment.status === 'pending') {
+
+      const approveBtn = document.createElement('button');
+      approveBtn.className = 'approve';
+      approveBtn.textContent = 'Approve';
+
+      approveBtn.onclick = () =>
+        updatePayment(payment.id, 'approved');
+
+      const rejectBtn = document.createElement('button');
+      rejectBtn.className = 'reject';
+      rejectBtn.textContent = 'Reject';
+
+      rejectBtn.onclick = () =>
+        updatePayment(payment.id, 'rejected');
+
+      actionCell.append(approveBtn, rejectBtn);
+
+    } else {
+      actionCell.textContent = 'সিদ্ধান্ত নেওয়া হয়েছে';
+    }
+
+    tr.appendChild(actionCell);
+    paymentList.appendChild(tr);
+
+  });
+
+};
+
+async function updatePayment(id, status) {
+
+  const action = status === 'approved' ? 'Approve' : 'Reject';
+
+  if (!confirm('আপনি কি এই Payment ' + action + ' করতে চান?')) {
+    return;
+  }
+
+  const { error } = await supabase
+    .from('payments')
+    .update({ status: status })
+    .eq('id', id);
+
+  if (error) {
+    alert('Update Error: ' + error.message);
+    return;
+  }
+
+  alert('Payment Status সফলভাবে Update হয়েছে।');
+
+  await loadPayments();
+}
+
+window.logout = async function() {
+
+  await supabase.auth.signOut();
+
+  window.location.href = './login.html';
+};
+
+const allowed = await checkAdmin();
+
+if (allowed) {
+  await loadPayments();
+}
+
+</script>
+
+</body>
+</html>
